@@ -18,6 +18,32 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Hello"
+  /employee:
+    post:
+      summary: creates a new employee. its state will be ADDED.
+      requestBody:
+        description: employee information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Employee"
+      operationId: employeeCreate
+      tags:
+        - employee
+      responses:
+        '201':
+          description: Details of newly created employee
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employee"
+        default:
+          description: error creating employee
+          content:
+            'text/html':
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
   /employee/{id}:
     parameters:
       - name: id

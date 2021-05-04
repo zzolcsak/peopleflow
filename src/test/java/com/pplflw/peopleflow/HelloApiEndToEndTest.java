@@ -24,7 +24,7 @@ public class HelloApiEndToEndTest {
     @Test
     public void whenCallingGetHello_thenReturnsPredefinedStringWithOk()
             throws Exception {
-        mvc.perform(get("hello")
+        mvc.perform(get("/hello")
             .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content()
