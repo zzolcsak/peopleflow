@@ -28,11 +28,10 @@ test {
 	useJUnitPlatform()
 }
 
-// generates the spring controller interfaces from openapi spec in
-// src/main/resources/service.yaml
+// generate models and endpoint for the peopleflow contract
 openApiGenerate {
 	generatorName = "spring"
-	inputSpec = "$projectDir/src/main/resources/service.yaml"
+	inputSpec = "$projectDir/src/main/resources/merged.yaml"
 	outputDir = "$buildDir/generated"
 	apiPackage = "com.pplflw.peopleflow.api"
 	invokerPackage = "com.pplflw.peopleflow"

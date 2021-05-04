@@ -1,0 +1,69 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: People Flow
+servers:
+  - url: http://localhost:8080
+paths:
+  /employee/{id}:
+    get:
+      summary: Gets the employee information by the employee id
+      operationId: employeeGetById
+      tags:
+        - employee
+      responses:
+        '200':
+          description: Employee details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employee"
+        default:
+          description: error getting employee by id
+          content:
+            'text/html':
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+components:
+  schemas:
+    Employee:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        name:
+          type: string
+        age:
+          type: integer
+          minimum: 1
+          maximum: 200
+        contractInformation:
+          type: string
+        state:
+          type: '#/components/schemas/EmployeeState'
+    EmployeeState:
+      required:
+        - state
+      state:
+        enum:
+          - ADDED
+          - IN-CHECK
+          - APPROVED
+          - ACTIVE
+        default: ADDED
+    ErrorModel:
+      type: object
+      required:
+        - message
+        - code
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+          minimum: 100
+          maximum: 600
