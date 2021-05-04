@@ -34,7 +34,7 @@ test {
 // generate models and endpoint for the peopleflow contract
 openApiGenerate {
 	generatorName = "spring"
-	inputSpec = "$projectDir/src/main/resources/merged.yaml"
+	inputSpec = "$projectDir/src/main/resources/peopleflow-openapi-contracts.yaml"
 	outputDir = "$buildDir/generated"
 	apiPackage = "com.pplflw.peopleflow.api"
 	invokerPackage = "com.pplflw.peopleflow"

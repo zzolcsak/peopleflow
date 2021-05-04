@@ -5,7 +5,41 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
+  /employee:
+    post:
+      summary: creates a new employee. its state will be ADDED.
+      requestBody:
+        description: employee information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Employee"
+      operationId: employeeCreate
+      tags:
+        - employee
+      responses:
+        '201':
+          description: Details of newly created employee
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Employee"
+        default:
+          description: error creating employee
+          content:
+            'text/html':
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
   /employee/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: id of the employee
+        schema:
+          type: integer
+          minimum: 1
     get:
       summary: Gets the employee information by the employee id
       operationId: employeeGetById
@@ -24,9 +58,21 @@ paths:
             'text/html':
               schema:
                 $ref: '#/components/schemas/ErrorModel'
-
 components:
   schemas:
+    EmployeeState:
+      description: the state of the employee in the hiring process
+      required:
+        - state
+      properties:
+        state:
+          type: string
+          enum:
+            - ADDED
+            - IN-CHECK
+            - APPROVED
+            - ACTIVE
+          default: ADDED
     Employee:
       required:
         - id
@@ -44,17 +90,7 @@ components:
         contractInformation:
           type: string
         state:
-          type: '#/components/schemas/EmployeeState'
-    EmployeeState:
-      required:
-        - state
-      state:
-        enum:
-          - ADDED
-          - IN-CHECK
-          - APPROVED
-          - ACTIVE
-        default: ADDED
+          type: '#/EmployeeState'
     ErrorModel:
       type: object
       required:

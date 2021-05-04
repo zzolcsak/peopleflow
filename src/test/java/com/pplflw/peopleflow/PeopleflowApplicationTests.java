@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class PeopleflowApplicationTests {
 
 	@Test
+	@SuppressWarnings("java:S2699") // no assertions in test
 	void contextLoads() {
 	}
 
