@@ -41,4 +41,13 @@ public enum EmployeeStateEntity {
                         + this);
         }
     }
+
+    public boolean directlyPrecedes(EmployeeStateEntity state) {
+        switch(this) {
+            case ADDED: return state.equals(IN_CHECK);
+            case IN_CHECK: return state.equals(APPROVED);
+            case APPROVED: return state.equals(ACTIVE);
+            default: return false;
+        }
+    }
 }

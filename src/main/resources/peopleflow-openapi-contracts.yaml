@@ -20,11 +20,7 @@ paths:
         - employee
       responses:
         '201':
-          description: Details of newly created employee
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Employee"
+          description: Employee successfully created
         default:
           description: error creating employee
           content:
@@ -40,6 +36,23 @@ paths:
         schema:
           type: integer
           minimum: 1
+    patch:
+      summary: Change the state of an employee
+      requestBody:
+        description: employee information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Employee"
+      operationId: employeeChangeState
+      tags:
+        - employee
+      responses:
+        '204':
+          description: state successfully changed
+        default:
+          description: error changing employee state
     get:
       summary: Gets the employee information by the employee id
       operationId: employeeGetById

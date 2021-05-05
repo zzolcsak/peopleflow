@@ -9,5 +9,6 @@ public interface EmployeeService {
     Optional<EmployeeEntity> findById(Integer id);
     List<EmployeeEntity> findAll();
     EmployeeEntity createEmployee(EmployeeEntity employee);
+    EmployeeEntity updateEmployee(EmployeeEntity employee);
     void deleteEmployee(EmployeeEntity employee);
 }

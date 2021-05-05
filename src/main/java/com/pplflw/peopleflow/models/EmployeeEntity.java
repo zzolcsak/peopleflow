@@ -50,11 +50,13 @@ public class EmployeeEntity {
     }
 
     public void setState(EmployeeStateEntity state) {
-        this.state = state;
+        if (this.state == null || this.state.directlyPrecedes(state)) {
+            this.state = state;
+        }
     }
 
     public static EmployeeEntity fromEmployee(Employee employee) {
-        EmployeeEntity e = new EmployeeEntity();
+        var e = new EmployeeEntity();
         e.setId(employee.getId());
         e.setName(employee.getName());
         e.setContractInformation(employee.getContractInformation());
