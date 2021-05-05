@@ -18,3 +18,11 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
+  java:
+    tty: true # Enables debugging capabilities when attached to this container.
+    image: docker.io/bitnami/java:11
+    volumes:
+      - .:/peopleflow
+    ports:
+      - 8080:8080
+    command: ["./peopleflow/gradlew", "clean", "bootRun"]

@@ -6,8 +6,8 @@ plugins {
 }
 
 group = 'com.pplflw'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+version = '1.0.0-RELEASE'
+project.sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
