@@ -8,6 +8,7 @@ plugins {
 group = 'com.pplflw'
 version = '1.0.0-RELEASE'
 project.sourceCompatibility = '11'
+rootProject.name = 'peopleflow'
 
 repositories {
 	mavenCentral()
