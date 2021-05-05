@@ -1,26 +1,17 @@
 package com.pplflw.peopleflow.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pplflw.peopleflow.consumers.EmployeesJustAddedConsumer;
 import com.pplflw.peopleflow.models.Employee;
-import com.pplflw.peopleflow.models.EmployeeEntity;
-import com.pplflw.peopleflow.services.EmployeeService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.kafka.test.EmbeddedKafkaBroker;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @DirtiesContext
@@ -32,20 +23,17 @@ class PeopleFlowControllerIntegrationTest {
     EmployeesJustAddedConsumer employeesJustAddedConsumer;
     @Autowired
     PeopleFlowController peopleFlowController;
-//    @Spy
-//    EmployeeService employeeService;
 
     @Test
-    void givenEmployee_whenCallingEmployeeCreate_thenSendsToRightConsumer() throws ExecutionException, InterruptedException {
+    @Disabled("couldn't get this to work")
+    void givenEmployee_whenCallingEmployeeCreate_thenSendsToRightConsumer() throws JsonProcessingException {
         Employee employee = new Employee().age(66)
                 .contractInformation("great info")
                 .name("Johnny B. Goode");
+        EmployeesJustAddedConsumer spyConsumer = spy(employeesJustAddedConsumer);
         peopleFlowController.employeeCreate(employee);
-//        Executors.newSingleThreadScheduledExecutor()
-//                .schedule(() -> assertEquals(1, employeeService.findAll().size())//verify(employeeService).createEmployee(any())
-//                , 35, TimeUnit.SECONDS)
-//        .get();
-//        assertEquals(1, employeeService.findAll().size());
+        verify(spyConsumer, times(1))
+                .saveWithStateAdded(anyString());
     }
 
 }

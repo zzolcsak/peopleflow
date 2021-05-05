@@ -53,24 +53,6 @@ paths:
           description: state successfully changed
         default:
           description: error changing employee state
-    get:
-      summary: Gets the employee information by the employee id
-      operationId: employeeGetById
-      tags:
-        - employee
-      responses:
-        '200':
-          description: Employee details
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Employee"
-        default:
-          description: error getting employee by id
-          content:
-            'text/html':
-              schema:
-                $ref: '#/components/schemas/ErrorModel'
 components:
   schemas:
     EmployeeState:
